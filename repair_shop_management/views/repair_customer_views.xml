@@ -1,0 +1,65 @@
+<odoo>
+
+    <record id="customer_tree_view" model="ir.ui.view">
+        <field name="name">Customer tree view</field>
+        <field name="model">repair.customer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="address"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="customer_form_view" model="ir.ui.view">
+        <field name="name">Customer form view</field>
+        <field name="model">repair.customer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="phone"/>
+                        <field name="email"/>
+                        <field name="address"/>
+                        <field name="active"/>
+<!--                        <field name="vehicle_ids" widget="many2many_tags"/>-->
+<!--                        <field name="repair_order_ids" widget="many2many_tags"/>-->
+                    </group>
+                    <notebook>
+                        <page string="Vehicle">
+                            <field name="vehicle_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="license_plate"/>
+                                    <field name="model_year"/>
+                                    <field name="vin"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Order">
+                            <field name="repair_order_ids">
+                                <tree>
+                                    <field name="order_date"/>
+                                    <field name="expected_completion_date"/>
+                                    <field name="actual_completion_date"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="customer_action" model="ir.actions.act_window">
+        <field name="name">Customer</field>
+        <field name="res_model">repair.customer</field>
+    </record>
+
+</odoo>

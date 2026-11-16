@@ -1,0 +1,66 @@
+<odoo>
+
+    <menuitem
+        id="wsc_menu_root"
+        name="Warehouse Stock Control"
+        sequence="10"
+        groups="warehouse_stock_control.group_warehouse_user,warehouse_stock_control.group_warehouse_manager"
+    />
+
+    <menuitem
+        id="wsc_product_menu"
+        name="Products"
+        parent="wsc_menu_root"
+        action="product_action"
+        sequence="10"
+    />
+
+    <menuitem
+        id="wsc_warehouse_menu"
+        name="Warehouses"
+        parent="wsc_menu_root"
+        action="warehouse_action"
+        sequence="20"
+    />
+
+    <menuitem
+        id="wsc_location_menu"
+        name="Locations"
+        parent="wsc_menu_root"
+        action="location_action"
+        sequence="30"
+    />
+
+    <menuitem
+        id="wsc_quant_menu"
+        name="Stock Quants"
+        parent="wsc_menu_root"
+        action="quant_action"
+        sequence="40"
+    />
+
+    <menuitem
+        id="wsc_picking_menu"
+        name="Stock Pickings"
+        parent="wsc_menu_root"
+        action="picking_action"
+        sequence="50"
+    />
+
+    <menuitem
+        id="wsc_move_menu"
+        name="Stock Moves"
+        parent="wsc_menu_root"
+        action="move_action"
+        sequence="60"
+    />
+
+    <menuitem
+        id="wsc_adj_menu"
+        name="Stock Adjustments"
+        parent="wsc_menu_root"
+        action="adjustment_action"
+        sequence="70"
+    />
+
+</odoo>

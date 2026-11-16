@@ -1,0 +1,60 @@
+<odoo>
+
+    <record id="product_tree_view" model="ir.ui.view">
+        <field name="name">Product Tree</field>
+        <field name="model">wsc.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="default_code"/>
+                <field name="category"/>
+                <field name="unit_price"/>
+                <field name="cost_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_view_view" model="ir.ui.view">
+        <field name="name">Product View</field>
+        <field name="model">wsc.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Main Info">
+                            <field name="name"/>
+                            <field name="default_code"/>
+                            <field name="category"/>
+                            <field name="active"/>
+                            <field name="description"/>
+                        </group>
+                        <group string="Price Info">
+                            <field name="unit_price"/>
+                            <field name="cost_price"/>
+                            <field name="minimum_stock"/>
+                            <field name="total_quantity"/>
+                            <field name="is_low_stock"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Stock Quantity Info">
+                            <field name="stock_quant_ids">
+                                <tree>
+                                    <field name="product_id"/>
+                                    <field name="location_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_action" model="ir.actions.act_window">
+        <field name="name">Product</field>
+        <field name="res_model">wsc.product</field>
+    </record>
+
+</odoo>

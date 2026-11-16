@@ -1,0 +1,40 @@
+<odoo>
+
+    <record id="service_tree_view" model="ir.ui.view">
+        <field name="name">Service tree view</field>
+        <field name="model">repair.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="price"/>
+                <field name="estimated_hours"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="service_form_view" model="ir.ui.view">
+        <field name="name">Service form view</field>
+        <field name="model">repair.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="price"/>
+                        <field name="estimated_hours"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="service_action" model="ir.actions.act_window">
+        <field name="name">Service</field>
+        <field name="res_model">repair.service</field>
+    </record>
+
+</odoo>

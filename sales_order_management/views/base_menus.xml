@@ -1,0 +1,25 @@
+<odoo>
+
+        <menuitem
+            id="sale_order_menu_root"
+            name="Sale System"/>
+            
+        <menuitem
+                id="som_order_menu"
+                name="Order"
+                parent="sale_order_menu_root"
+                action="som_order_action"/>
+            
+        <menuitem
+                id="som_order_line_menu"
+                name="Order Line"
+                parent="sale_order_menu_root"
+                action="som_order_line_action"/>
+
+        <menuitem
+            id="som_tag_menu"
+            name="Tag"
+            parent="sale_order_menu_root"
+            action="som_order_tag_action"/>
+
+</odoo>

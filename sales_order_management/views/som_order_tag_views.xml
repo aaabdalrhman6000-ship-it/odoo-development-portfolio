@@ -1,0 +1,34 @@
+<odoo>
+
+    <record id="som_order_tag_tree_view" model="ir.ui.view">
+        <field name="name">som  order tag tree view</field>
+        <field name="model">som.order.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="color"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="som_order_tag_view_view" model="ir.ui.view">
+        <field name="name">Som  order tag view view</field>
+        <field name="model">som.order.tag</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="color"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="som_order_tag_action" model="ir.actions.act_window">
+        <field name="name">Tag</field>
+        <field name="res_model">som.order.tag</field>
+    </record>
+
+</odoo>

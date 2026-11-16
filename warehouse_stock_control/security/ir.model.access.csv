@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wsc_product_user,wsc.product user,model_wsc_product,group_warehouse_user,1,1,1,0
+access_wsc_product_manager,wsc.product manager,model_wsc_product,group_warehouse_manager,1,1,1,1
+access_wsc_warehouse_user,wsc.warehouse user,model_wsc_warehouse,group_warehouse_user,1,1,1,0
+access_wsc_warehouse_manager,wsc.warehouse manager,model_wsc_warehouse,group_warehouse_manager,1,1,1,1
+access_wsc_location_user,wsc.location user,model_wsc_location,group_warehouse_user,1,1,1,0
+access_wsc_location_manager,wsc.location manager,model_wsc_location,group_warehouse_manager,1,1,1,1
+access_wsc_quant_user,wsc.stock.quant user,model_wsc_stock_quant,group_warehouse_user,1,1,1,0
+access_wsc_quant_manager,wsc.stock.quant manager,model_wsc_stock_quant,group_warehouse_manager,1,1,1,1
+access_wsc_picking_user,wsc.stock.picking user,model_wsc_stock_picking,group_warehouse_user,1,1,1,0
+access_wsc_picking_manager,wsc.stock.picking manager,model_wsc_stock_picking,group_warehouse_manager,1,1,1,1
+access_wsc_move_user,wsc.stock.move user,model_wsc_stock_move,group_warehouse_user,1,1,1,0
+access_wsc_move_manager,wsc.stock.move manager,model_wsc_stock_move,group_warehouse_manager,1,1,1,1
+access_wsc_adjustment_user,wsc.stock.adjustment user,model_wsc_stock_adjustment,group_warehouse_user,1,1,1,0
+access_wsc_adjustment_manager,wsc.stock.adjustment manager,model_wsc_stock_adjustment,group_warehouse_manager,1,1,1,1
+access_wsc_adjustment_line_user,wsc.stock.adjustment.line user,model_wsc_stock_adjustment_line,group_warehouse_user,1,1,1,0
+access_wsc_adjustment_line_manager,wsc.stock.adjustment.line manager,model_wsc_stock_adjustment_line,group_warehouse_manager,1,1,1,1

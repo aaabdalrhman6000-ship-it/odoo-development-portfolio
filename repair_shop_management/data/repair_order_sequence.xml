@@ -1,0 +1,8 @@
+<odoo>
+    <record id="order_sequence" model="ir.sequence">
+        <field name="name">Order Seq</field>
+        <field name="code">order_seq</field>
+        <field name="prefix">OR</field>
+        <field name="padding">6</field>
+    </record>
+</odoo>

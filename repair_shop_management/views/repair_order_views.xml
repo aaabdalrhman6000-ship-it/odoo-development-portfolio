@@ -1,0 +1,99 @@
+<odoo>
+
+    <record id="order_tree_view" model="ir.ui.view">
+        <field name="name">Order tree view</field>
+        <field name="model">repair.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ref"/>
+                <field name="order_date"/>
+                <field name="expected_completion_date"/>
+                <field name="actual_completion_date"/>
+                <field name="customer_id"/>
+                <field name="vehicle_id"/>
+                <field name="state"/>
+                <field name="total_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="order_form_view" model="ir.ui.view">
+        <field name="name">Order form view</field>
+        <field name="model">repair.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                            name="action_confirm"
+                            string="Confirm"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button
+                            name="action_start"
+                            string="In progress"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state != 'confirmed'"/>
+                    <button
+                            name="action_complete"
+                            string="Complete"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'in_progress'"/>
+                    <button
+                            name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state not in ('draft', 'confirmed')"/>
+                    <field
+                            name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,confirmed,in_progress,completed,cancel"
+                           readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="ref"/>
+                        <field name="order_date"/>
+                        <field name="customer_id"/>
+                        <field name="vehicle_id"/>
+                        <field name="mechanic_ids" widget="many2many_tags"/>
+                        <field name="expected_completion_date"/>
+                        <field name="actual_completion_date" readonly="True"/>
+                        <field name="description"/>
+                        <field name="notes"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Amount">
+                        <field name="total_amount" readonly="True"/>
+                        <field name="total_service_amount" readonly="True"/>
+                        <field name="total_parts_amount" readonly="True"/>
+                    </group>
+                    <notebook>
+                        <page string="Order Line">
+                            <field name="order_line_ids">
+                                <tree>
+                                    <field name="line_type"/>
+                                    <field name="service_id"/>
+                                    <field name="part_id"/>
+                                    <field name="description"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_price"/>
+                                    <field name="subtotal" readonly="True"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="order_action" model="ir.actions.act_window">
+        <field name="name">Order</field>
+        <field name="res_model">repair.order</field>
+    </record>
+
+</odoo>

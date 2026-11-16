@@ -1,0 +1,48 @@
+<odoo>
+
+    <record id="som_group_category" model="ir.module.category">
+        <field name="name">Sales</field>
+    </record>
+
+    <record id="som_user" model="res.groups">
+        <field name="name">Sales User</field>
+        <field name="category_id" ref="sales_order_management.som_group_category"/>
+    </record>
+
+    <record id="som_manager" model="res.groups">
+        <field name="name">Sales Manager</field>
+        <field name="category_id" ref="sales_order_management.som_group_category"/>
+        <field name="implied_ids" eval="[(4, ref('som_user'))]"/>
+    </record>
+
+    <record id="som_user_rules" model="ir.rule">
+        <field name="name">Sales User : Some access</field>
+        <field name="model_id" ref="model_som_order"/>
+        <field name="groups" eval="[(4,ref('sales_order_management.som_user'))]"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="som_manager_rules" model="ir.rule">
+        <field name="name">Sales Manager : All access</field>
+        <field name="model_id" ref="model_som_order"/>
+        <field name="groups" eval="[(4,ref('sales_order_management.som_manager'))]"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+    </record>
+
+    <record id="som_order_line_user_rule" model="ir.rule">
+        <field name="name">Sales User: Own Order Lines</field>
+        <field name="model_id" ref="model_som_order_line"/>
+        <field name="groups"
+               eval="[(4, ref('sales_order_management.som_user'))]"/>
+        <field name="domain_force">[('order_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="som_order_line_manager_rule" model="ir.rule">
+        <field name="name">Sales Manager: All Order Lines</field>
+        <field name="model_id" ref="model_som_order_line"/>
+        <field name="groups"
+               eval="[(4, ref('sales_order_management.som_manager'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+</odoo>

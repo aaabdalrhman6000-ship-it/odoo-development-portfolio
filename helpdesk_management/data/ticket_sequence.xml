@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="ticket_sequence" model="ir.sequence">
+            <field name="name">Ticket Seq.</field>
+            <field name="code">ticket_seq</field>
+            <field name="prefix">TI</field>
+            <field name="padding">6</field>
+
+        </record>
+    </data>
+</odoo>

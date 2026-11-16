@@ -1,0 +1,16 @@
+<odoo>
+    <record id="repair_group" model="ir.module.category">
+        <field name="name">Repair Access</field>
+    </record>
+
+    <record id="repair_user" model="res.groups">
+        <field name="name">Mechanic User</field>
+        <field name="category_id" ref="repair_shop_management.repair_group"/>
+    </record>
+
+    <record id="repair_manager" model="res.groups">
+        <field name="name">Repair Manager</field>
+        <field name="category_id" ref="repair_shop_management.repair_group"/>
+    </record>
+
+</odoo>

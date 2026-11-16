@@ -1,0 +1,140 @@
+<odoo>
+
+    <record id="order_view_report" model="ir.actions.report">
+        <field name="name">Order Report</field>
+        <field name="model">som.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sales_order_management.som_report_order</field>
+        <field name="report_file">sales_order_management.som_report_order</field>
+        <field name="binding_model_id" ref="model_som_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="som_report_order">
+
+        <t t-call="web.html_container">
+
+            <t t-foreach="docs" t-as="o">
+
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+
+                        <h1>Order Report</h1>
+
+                        <table class="table table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th colspan="2">General Information</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Order Reference</td>
+                                    <td>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Customer</td>
+                                    <td>
+                                        <span t-field="o.partner_id.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Salesperson</td>
+                                    <td>
+                                        <span t-field="o.user_id.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Order Date</td>
+                                    <td>
+                                        <span t-field="o.date_order"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Validity Date</td>
+                                    <td>
+                                        <span t-field="o.validity_date"/>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount</th>
+                                    <th>Taxes</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <tr>
+                                        <td><span t-field="line.product_id"/></td>
+                                        <td><span t-field="line.name"/></td>
+                                        <td><span t-field="line.quantity"/></td>
+                                        <td><span t-field="line.price_unit"/></td>
+                                        <td><span t-field="line.discount"/></td>
+                                        <td>
+                                            <span t-esc="', '.join(line.tax_ids.mapped('name'))"/>
+                                        </td>
+                                        <td><span t-field="line.subtotal"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Amount Untaxed</th>
+                                    <th>Amount Tax</th>
+                                    <th>Amount Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span t-field="o.amount_untaxed"/></td>
+                                    <td><span t-field="o.amount_tax"/></td>
+                                    <td><span t-field="o.amount_total"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span t-field="o.note"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </t>
+
+            </t>
+
+        </t>
+
+    </template>
+
+</odoo>

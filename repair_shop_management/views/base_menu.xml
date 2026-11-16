@@ -1,0 +1,42 @@
+<odoo>
+
+    <menuitem id="repair_shop_root_menu"
+              name="Repair Shop"/>
+
+    <menuitem id="customer_action_menu"
+              name="Customer"
+              parent="repair_shop_root_menu"
+              action="customer_action"/>
+
+    <menuitem id="vehicle_action_menu"
+              name="Vehicle"
+              parent="repair_shop_root_menu"
+              action="vehicle_action"/>
+
+    <menuitem id="mechanic_action_menu"
+              name="Mechanic"
+              parent="repair_shop_root_menu"
+              action="mechanic_action"/>
+
+    <menuitem id="service_action_menu"
+              name="Service"
+              parent="repair_shop_root_menu"
+              action="service_action"/>
+
+    <menuitem id="part_action_menu"
+              name="Repair Part"
+              parent="repair_shop_root_menu"
+              action="part_action"/>
+
+
+    <menuitem id="order_action_menu"
+              name="Order"
+              parent="repair_shop_root_menu"
+              action="order_action"/>
+
+    <menuitem id="order_line_action_menu"
+              name="Order Line"
+              parent="repair_shop_root_menu"
+              action="order_line_action"/>
+
+</odoo>

@@ -1,0 +1,19 @@
+<odoo>
+    <menuitem id="helpdesk_system_menu_root"
+              name="Help Desk"/>
+
+    <menuitem id="ticket_menu_action"
+              name="Ticket"
+              parent="helpdesk_system_menu_root"
+              action="ticket_action"/>
+
+    <menuitem id="team_menu_action"
+              name="Team"
+              parent="helpdesk_system_menu_root"
+              action="team_action"/>
+
+    <menuitem id="tag_menu_action"
+              name="Tag"
+              parent="helpdesk_system_menu_root"
+              action="tag_action"/>
+</odoo>

@@ -1,0 +1,86 @@
+<odoo>
+
+    <record id="adjustment_tree_view" model="ir.ui.view">
+        <field name="name">Adjustment Tree</field>
+        <field name="model">wsc.stock.adjustment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="warehouse_id"/>
+                <field name="user_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="adjustment_view_view" model="ir.ui.view">
+        <field name="name">Adjustment View</field>
+        <field name="model">wsc.stock.adjustment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+
+                    <button
+                            name="action_confirm"
+                            string="Confirm"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+
+                    <button
+                            name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state != 'draft'"/>
+
+                    <field name="state" widget="statusbar" readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                        <field name="warehouse_id"/>
+                        <field name="user_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Lines">
+                            <field name="line_ids" readonly="state != 'draft'">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="location_id"/>
+                                    <field name="theoretical_quantity" readonly="1"/>
+                                    <field name="counted_quantity"/>
+                                    <field name="difference" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="search_adjustment_view" model="ir.ui.view">
+        <field name="name">Search View</field>
+        <field name="model">wsc.stock.adjustment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="confirmed" string="Confirm" domain="[('state','=','confirmed')]"/>
+                <filter name="cancelled" string="Cancel" domain="[('state','=','cancelled')]"/>
+                <filter name="warehouse" string="Warehouse" context="{'group_by':'warehouse_id'}"/>
+                <filter name="state" string="State" context="{'group_by':'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="adjustment_action" model="ir.actions.act_window">
+        <field name="name">Adjustment</field>
+        <field name="res_model">wsc.stock.adjustment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

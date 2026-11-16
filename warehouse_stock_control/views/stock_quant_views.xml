@@ -1,0 +1,65 @@
+<odoo>
+
+    <record id="quant_tree_view" model="ir.ui.view">
+        <field name="name">Quant Tree</field>
+        <field name="model">wsc.stock.quant</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="quantity"/>
+                <field name="reserved_quantity"/>
+                <field name="available_quantity"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="quant_form_view" model="ir.ui.view">
+        <field name="name">Quant Form</field>
+        <field name="model">wsc.stock.quant</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="product_id"/>
+                        <field name="location_id"/>
+                    </group>
+                    <group>
+                        <field name="quantity"/>
+                        <field name="reserved_quantity"/>
+                        <field name="available_quantity" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="quant_search_view" model="ir.ui.view">
+        <field name="name">Quant Search</field>
+        <field name="model">wsc.stock.quant</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <filter
+                        name="available_quantity"
+                        string="Available Stock"
+                        domain="[('available_quantity', '>', 0)]"/>
+                <filter name="quantity"
+                        string="Out of Stock"
+                        domain="[('quantity', '=', 0)]"/>
+                <filter
+                        name="reserved_quantity"
+                        string="Reserved Stock"
+                        domain="[('reserved_quantity', '>', 0)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="quant_action" model="ir.actions.act_window">
+        <field name="name">Quant</field>
+        <field name="res_model">wsc.stock.quant</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

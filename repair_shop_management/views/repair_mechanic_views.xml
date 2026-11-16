@@ -1,0 +1,44 @@
+<odoo>
+
+    <record id="mechanic_tree_view" model="ir.ui.view">
+        <field name="name">Mechanic tree view</field>
+        <field name="model">repair.mechanic</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="specialization"/>
+                <field name="user_id"/>
+                <field name="repair_order_ids"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mechanic_form_view" model="ir.ui.view">
+        <field name="name">Mechanic form view</field>
+        <field name="model">repair.mechanic</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="phone"/>
+                        <field name="email"/>
+                        <field name="specialization"/>
+                        <field name="user_id"/>
+                        <field name="repair_order_ids" widget="many2many_tags"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mechanic_action" model="ir.actions.act_window">
+        <field name="name">Mechanic</field>
+        <field name="res_model">repair.mechanic</field>
+    </record>
+
+</odoo>

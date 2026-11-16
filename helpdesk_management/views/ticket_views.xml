@@ -1,0 +1,154 @@
+<odoo>
+
+    <record id="ticket_kanban_view" model="ir.ui.view">
+        <field name="name">Ticket kanban view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state"
+                    records_draggable="true"
+                    quick_create="false">
+
+                <!-- Fields used in the card -->
+                <field name="ref"/>
+                <field name="name"/>
+                <field name="priority"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="team_id"/>
+                <field name="state"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+
+                                <div class="text-muted">
+                                    <field name="ref"/>
+                                </div>
+
+                                <div class="mt-2">
+                                    <strong>Priority:</strong>
+                                    <field name="priority"/>
+                                </div>
+
+                                <div>
+                                    <strong>Customer:</strong>
+                                    <field name="partner_id"/>
+                                </div>
+
+                                <div>
+                                    <strong>Assigned to:</strong>
+                                    <field name="user_id"/>
+                                </div>
+
+                                <div>
+                                    <strong>Team:</strong>
+                                    <field name="team_id"/>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="ticket_tree_view" model="ir.ui.view">
+        <field name="name">Ticket tree view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="is_overdue == True">
+                <field name="ref"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="priority"/>
+                <field name="state"/>
+                <field name="date_create"/>
+                <field name="deadline"/>
+                <field name="is_urgent"/>
+                <field name="estimated_hours"/>
+                <field name="active"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="team_id"/>
+                <field name="tag_ids"/>
+                <field name="is_overdue" column_invisible="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ticket_form_view" model="ir.ui.view">
+        <field name="name">Ticket form view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Main Info">
+                        <field name="ref"/>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="user_id"/>
+                        <field name="team_id"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="description"/>
+                    </group>
+                    <group string="Additional Info">
+                        <field name="priority"/>
+                        <field name="state"/>
+                        <field name="date_create"/>
+                        <field name="deadline"/>
+                        <field name="is_urgent"/>
+                        <field name="is_overdue"/>
+                        <field name="days_remaining"/>
+                        <field name="ticket_duration"/>
+                        <field name="estimated_hours"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Description">
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ticket_search_view" model="ir.ui.view">
+        <field name="name">Ticket search</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="ref"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="team_id"/>
+                <separator/>
+                <filter name="new" string="New" domain="[('state','=','new')]"/>
+                <filter name="in_progress" string="In Progress" domain="[('state','=','in_progress')]"/>
+                <filter name="solved" string="Solved" domain="[('state','=','solved')]"/>
+                <filter name="closed" string="Closed" domain="[('state','=','closed')]"/>
+                <filter name="urgent" string="Urgent" domain="[('priority','=','urgent')]"/>
+                <filter name="is_overdue" string="Is Overdue" domain="[('is_overdue','=','True')]"/>
+                <separator/>
+                <filter name="state" string="State" context="{'group_by':'state'}"/>
+                <filter name="priority" string="Priority" context="{'group_by':'priority'}"/>
+                <filter name="team" string="Team" context="{'group_by':'team_id'}"/>
+                <filter name="user" string="User" context="{'group_by':'user_id'}"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="ticket_action" model="ir.actions.act_window">
+        <field name="name">Ticket</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+</odoo>

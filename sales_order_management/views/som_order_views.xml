@@ -1,0 +1,106 @@
+<odoo>
+
+    <record id="som_order_tree_view" model="ir.ui.view">
+        <field name="name">som order tree view</field>
+        <field name="model">som.order</field>
+        <field name="arch" type="xml">
+            <tree
+                    decoration-info="state =='draft'"
+                    decoration-success="state =='done'"
+                    decoration-danger="state == 'cancelled'"
+                    decoration-warning="state == 'confirmed'">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="date_order"/>
+                <field name="validity_date"/>
+                <field name="amount_total"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="som_order_view_view" model="ir.ui.view">
+        <field name="name">Som order view view</field>
+        <field name="model">som.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm"
+                            type="object"
+                            string="Confirm"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+
+                    <button name="action_done"
+                            type="object"
+                            string="Done"
+                            class="btn-primary"
+                            invisible="state != 'confirmed'"/>
+
+                    <button name="action_cancel"
+                            type="object"
+                            string="Cancel"
+                            invisible="state not in ('draft', 'confirmed')"/>
+
+                    <button name="action_reset_to_draft"
+                            type="object"
+                            string="Reset to Draft"
+                            invisible="state != 'cancelled'"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group string="Order Information">
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="user_id"/>
+                        <field name="date_order"/>
+                        <field name="validity_date"/>
+                        <field
+                                name="tag_ids"
+                                widget="many2many_tags"
+                                options="{'color_field': 'color'}"/>
+                    </group>
+                    <group string="Total">
+                        <field name="amount_untaxed" readonly="1"/>
+                        <field name="amount_tax" readonly="1"/>
+                        <field name="amount_total" readonly="1"/>
+                    </group>
+                    <group string="Other Info">
+                        <field name="currency_id"/>
+                        <field name="company_id"/>
+                        <field name="note"/>
+                        <field name="cancel_reason"/>
+                    </group>
+                    <notebook>
+                        <page string="Line Order">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount"/>
+                                    <field name="tax_ids"/>
+                                    <field name="subtotal"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="som_order_action" model="ir.actions.act_window">
+        <field name="name">Order</field>
+        <field name="res_model">som.order</field>
+    </record>
+
+</odoo>

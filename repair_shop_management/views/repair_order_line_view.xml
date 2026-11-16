@@ -1,0 +1,46 @@
+<odoo>
+
+    <record id="order_line_tree_view" model="ir.ui.view">
+        <field name="name">Order Line tree view</field>
+        <field name="model">repair.order.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_id"/>
+                <field name="service_id"/>
+                <field name="part_id"/>
+                <field name="description"/>
+                <field name="quantity"/>
+                <field name="unit_price"/>
+                <field name="subtotal"/>
+                <field name="line_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="order_line_form_view" model="ir.ui.view">
+        <field name="name">Order Line form view</field>
+        <field name="model">repair.order.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="line_type"/>
+                        <field name="service_id" invisible="line_type == 'spare_part'"/>
+                        <field name="part_id" invisible="line_type == 'service'"/>
+                        <field name="description"/>
+                        <field name="quantity"/>
+                        <field name="unit_price"/>
+                        <field name="subtotal" readonly="True"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="order_line_action" model="ir.actions.act_window">
+        <field name="name">Order Line</field>
+        <field name="res_model">repair.order.line</field>
+    </record>
+
+</odoo>

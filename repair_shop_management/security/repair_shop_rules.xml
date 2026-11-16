@@ -1,0 +1,57 @@
+
+<odoo>
+
+    <!-- Manager: Access all repair orders -->
+    <record id="rule_repair_order_manager" model="ir.rule">
+        <field name="name">Manager: All Repair Orders</field>
+        <field name="model_id" ref="model_repair_order"/>
+        <field name="groups"
+               eval="[(4, ref('repair_shop_management.repair_manager'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <!-- User: Only assigned repair orders -->
+    <record id="rule_repair_order_user" model="ir.rule">
+        <field name="name">User: Assigned Repair Orders</field>
+        <field name="model_id" ref="model_repair_order"/>
+        <field name="groups"
+               eval="[(4, ref('repair_shop_management.repair_user'))]"/>
+        <field name="domain_force">
+            [('mechanic_ids.user_id', '=', user.id)]
+        </field>
+    </record>
+
+    <!-- User: Customers linked to assigned orders -->
+    <record id="rule_repair_customer_user" model="ir.rule">
+        <field name="name">User: Assigned Repair Customers</field>
+        <field name="model_id" ref="model_repair_customer"/>
+        <field name="groups"
+               eval="[(4, ref('repair_shop_management.repair_user'))]"/>
+        <field name="domain_force">
+            [('repair_order_ids.mechanic_ids.user_id', '=', user.id)]
+        </field>
+    </record>
+
+    <!-- User: Vehicles linked to assigned orders -->
+    <record id="rule_repair_vehicle_user" model="ir.rule">
+        <field name="name">User: Assigned Repair Vehicles</field>
+        <field name="model_id" ref="model_repair_vehicle"/>
+        <field name="groups"
+               eval="[(4, ref('repair_shop_management.repair_user'))]"/>
+        <field name="domain_force">
+            [('repair_order_ids.mechanic_ids.user_id', '=', user.id)]
+        </field>
+    </record>
+
+    <!-- User: Lines belonging to assigned orders -->
+    <record id="rule_repair_order_line_user" model="ir.rule">
+        <field name="name">User: Assigned Repair Order Lines</field>
+        <field name="model_id" ref="model_repair_order_line"/>
+        <field name="groups"
+               eval="[(4, ref('repair_shop_management.repair_user'))]"/>
+        <field name="domain_force">
+            [('order_id.mechanic_ids.user_id', '=', user.id)]
+        </field>
+    </record>
+
+</odoo>
